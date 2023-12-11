@@ -16,7 +16,11 @@ build:
     # golang: "1.19"
 
 sphinx:
-   configuration: etc/docs/conf.py
+   configuration: etc/docs/source/conf.py
+
+python:
+  install:
+    - requirements: etc/docs/requirements.txt
 
 # Optionally build your docs in additional formats such as PDF and ePub
 # formats:
