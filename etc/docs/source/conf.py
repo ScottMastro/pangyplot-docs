@@ -22,7 +22,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'PangyPlot'
-copyright = u'2023, Scott Mastromatteo'
+copyright = u'2024, Scott Mastromatteo'
 author = u'Scott Mastromatteo'
 
 # The version info for the project you're documenting.
@@ -45,7 +45,7 @@ html_theme = "sphinx_rtd_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here, relative to this directory.
 # Ensure these directories exist or comment out if not used.
-html_static_path = ['_static']  # Changed from 'nstatic' to '_static'
+html_static_path = ['_static']
 
 # Custom sidebar templates.
 html_sidebars = {
@@ -54,6 +54,10 @@ html_sidebars = {
         'searchbox.html',
     ]
 }
+
+html_css_files = [
+    'pangyplot.css',
+]
 
 # HTMLHelp output.
 htmlhelp_basename = 'pangyplotdocs'
@@ -78,6 +82,6 @@ texinfo_documents = [
 ]
 
 # Path to logo and favicon. Ensure these files exist at the specified paths.
-html_logo = "resources/pangyplot_logo.svg"
-html_favicon = "resources/favicon.svg"
+html_logo = "_images/pangyplot_logo.svg"
+html_favicon = "_images/favicon.svg"
 

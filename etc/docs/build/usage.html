@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Input Files &mdash; PangyPlot 0.1.0 documentation</title>
+  <title>Usage &mdash; PangyPlot 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/pangyplot.css" />
@@ -24,8 +24,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Choosing Parameters" href="parameters.html" />
-    <link rel="prev" title="Local Build" href="local_build.html" /> 
+    <link rel="next" title="Background" href="background.html" />
+    <link rel="prev" title="PangyPlot" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,8 +53,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="local_build.html">Local Build</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Input Files</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#quick-summary">Quick Summary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#multi-sample-vcf">Multi-sample VCF</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#variant-specific-columns">Variant Specific Columns</a></li>
@@ -72,10 +71,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#bed-file-optional">BED File (Optional)</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="parameters.html">Choosing Parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tests.html">Association Tests</a></li>
-<li class="toctree-l1"><a class="reference internal" href="output.html">Output</a></li>
-<li class="toctree-l1"><a class="reference internal" href="power_calculation.html">Power Simulation Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="background.html">Background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Background</a></li>
 </ul>
 
         </div>
@@ -92,9 +89,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Input Files</li>
+      <li class="breadcrumb-item active">Usage</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/input.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/usage.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -102,8 +99,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="input-files">
-<span id="input"></span><h1>Input Files<a class="headerlink" href="#input-files" title="Permalink to this heading"></a></h1>
+  <section id="usage">
+<span id="id1"></span><h1>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h1>
 <section id="quick-summary">
 <h2>Quick Summary<a class="headerlink" href="#quick-summary" title="Permalink to this heading"></a></h2>
 <p>VikNGS takes 3 different file types as input:</p>
@@ -137,15 +134,15 @@
 <span id="multisample-vcf"></span><h2>Multi-sample VCF<a class="headerlink" href="#multi-sample-vcf" title="Permalink to this heading"></a></h2>
 <p>A Variant Call Format (VCF) file is a standard way of storing variant information called from sequencing data. Each row of a VCF file corresponds to a genetic variant (insertion, deletion or substitution) and contains information such as the genomic position of the variant, the confidence in the variant call and many other additional annotations.</p>
 <p>A multi-sample VCF is formatted identically to a single-sample VCF except it contains an extra set of columns corresponding to sample-specific data.</p>
-<figure class="align-center" id="id1">
-<img alt="Multsample VCF Layout" src="resources/vcf_layout.png" />
+<figure class="align-center" id="id2">
+<img alt="Multsample VCF Layout" src="_images/vcf_layout.png" />
 <figcaption>
-<p><span class="caption-text">The general layout of a multi-sample VCF file.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+<p><span class="caption-text">The general layout of a multi-sample VCF file.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
 <p>The first set of lines in a VCF file make up the header and are denoted by the characters <em>##</em>. The header includes information about the data source and how the VCF file was constructed. This information is ignored when by VikNGS. The last line of the header is denoted with a single <em>#</em> and includes the column names in addition to a unique identifier for every sample. The first nine columns must be (tab-delimited, in order) <strong>CHROM</strong>, <strong>POS</strong>, <strong>ID</strong>, <strong>REF</strong>, <strong>ALT</strong>, <strong>QUAL</strong>, <strong>FILTER</strong>, <strong>INFO</strong> and <strong>FORMAT</strong>. Every subsequent value is expected to be a unique sample identifier.</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text"><em>Example of a multi-sample VCF</em></span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>Example of a multi-sample VCF</em></span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span> <span class="c1">##fileformat=VCFv4.1</span>
  <span class="c1">##FILTER=&lt;ID=PASS,Description=&quot;All filters passed&quot;&gt;</span>
  <span class="c1">##FORMAT=&lt;ID=GT,Number=1,Type=String,Description=&quot;Genotype&quot;&gt;</span>
@@ -269,8 +266,8 @@ chr4    0    250</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="local_build.html" class="btn btn-neutral float-left" title="Local Build" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="parameters.html" class="btn btn-neutral float-right" title="Choosing Parameters" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="index.html" class="btn btn-neutral float-left" title="PangyPlot" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="background.html" class="btn btn-neutral float-right" title="Background" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

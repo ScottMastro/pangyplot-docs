@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PangyPlot &mdash; PangyPlot 0.1.0 documentation</title>
+  <title>Implementation &mdash; PangyPlot 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/pangyplot.css" />
@@ -23,7 +23,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Usage" href="usage.html" /> 
+    <link rel="next" title="Setup For Custom Pangenome" href="setup.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -34,7 +35,7 @@
 
           
           
-          <a href="#" class="icon icon-home">
+          <a href="index.html" class="icon icon-home">
             PangyPlot
               <img src="_static/pangyplot_logo.svg" class="logo" alt="Logo"/>
           </a>
@@ -50,9 +51,13 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="implementation.html">Implementation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#back-end">Back-end</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#front-end">Front-end</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup For Custom Pangenome</a></li>
 </ul>
 
@@ -62,17 +67,17 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="#">PangyPlot</a>
+          <a href="index.html">PangyPlot</a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">PangyPlot</li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Implementation</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/implementation.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -80,49 +85,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <figure class="align-default">
-<a class="reference external image-reference" href="index.html"><img alt="PangyPlot" src="_images/pangyplot_header.svg" width="500px" /></a>
-</figure>
-<section id="tool">
-<h1>PangyPlot<a class="headerlink" href="#tool" title="Permalink to this heading"></a></h1>
-<p>PangyPlot is a visualization tool developed for human pangenomic research. Its primary function is to offer visual representations of large graph genomes,  facilitating the exploration and analysis of complex genomic data.</p>
-<section id="motivation">
-<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this heading"></a></h2>
-<p>Visualization is a fundamental aspect of genomics research, enabling researchers to interpret and analyze data that is typically formatted for efficient computation and storage. A visual interface for navigating large, complex datasets is crucial for detecting patterns and gaining meaningful insights.</p>
-<p>Pangenomes often rely on a graph-based data structure</p>
-<figure class="align-center" id="id1">
-<img alt="Multsample VCF Layout" src="_images/graph_analogy.svg" /><figcaption>
-<p><span class="caption-text">The general layout of a multi-sample VCF file.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
-</figcaption>
-</figure>
+  <span class="target" id="implementation"></span><section id="id1">
+<h1>Implementation<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
+<p>VikNGS will output the p-values calculated to a text file in the current directory (i.e. “.”) by default. Output directory can be changed from the user interface or using <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">[DIRECTORY]</span></code> on the command line version.</p>
+<p>In addition to p-values, VikNGS can also produce a file detailing which variants were filtered out prior to testing and an explanation why. In future versions of the software, we hope to provide more types of output in addition to these files.</p>
 <figure class="align-center" id="id2">
-<img alt="Multsample VCF Layout" src="_images/graph_analogy2.svg" /><figcaption>
+<img alt="Multsample VCF Layout" src="_images/vcf_layout.png" />
+<figcaption>
 <p><span class="caption-text">The general layout of a multi-sample VCF file.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p><a class="reference external" href="https://github.com/ScottMastro/graph_viz">https://github.com/ScottMastro/graph_viz</a></p>
-<div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#quick-summary">Quick Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#multi-sample-vcf">Multi-sample VCF</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#sample-information-file">Sample Information File</a></li>
-<li class="toctree-l2"><a class="reference internal" href="usage.html#bed-file-optional">BED File (Optional)</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="implementation.html">Implementation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="implementation.html#back-end">Back-end</a></li>
-<li class="toctree-l2"><a class="reference internal" href="implementation.html#front-end">Front-end</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="setup.html">Setup For Custom Pangenome</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="setup.html#requirements">Requirements</a></li>
-<li class="toctree-l2"><a class="reference internal" href="setup.html#input">Input</a></li>
-</ul>
-</li>
-</ul>
-</div>
+<section id="back-end">
+<h2>Back-end<a class="headerlink" href="#back-end" title="Permalink to this heading"></a></h2>
+<p>PangyPlot uses the <a class="reference external" href="https://github.com/vasturiano/force-graph">D3 Force Graph library 🔗</a> and <a class="reference external" href="https://github.com/fawaz-dabbaghieh/bubble_gun">BubbleGun 🔗</a></p>
+<p><code class="docutils literal notranslate"><span class="pre">Chromosome</span>&#160; <span class="pre">Position</span>&#160; <span class="pre">Reference</span> <span class="pre">Alternative</span> <span class="pre">P-value</span> <span class="pre">TestName</span>&#160; <span class="pre">CollapseGroupID</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">CollapseGroupID</span></code> is only present if variants were collapsed into groups (single p-value per collapsed group).</p>
+</section>
+<section id="front-end">
+<h2>Front-end<a class="headerlink" href="#front-end" title="Permalink to this heading"></a></h2>
 </section>
 </section>
 
@@ -130,7 +110,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="setup.html" class="btn btn-neutral float-right" title="Setup For Custom Pangenome" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

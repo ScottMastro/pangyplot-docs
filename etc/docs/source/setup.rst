@@ -1,14 +1,11 @@
-.. _output:
+.. include:: substitutions.rst
+.. _background:
 
-Output
+Setup For Custom Pangenome
 ==================================
 
-VikNGS will output the p-values calculated to a text file in the current directory (i.e. ".") by default. Output directory can be changed from the user interface or using ``-o [DIRECTORY]`` on the command line version. 
 
-In addition to p-values, VikNGS can also produce a file detailing which variants were filtered out prior to testing and an explanation why. In future versions of the software, we hope to provide more types of output in addition to these files.
-
-
-P-value File
+Requirements
 ------------------------------
 
 This file will be produced upon completion of a series of association tests. Each line corresponds to a tested variant and records the resulting p-value. The file is tab-separated with the following columns:
@@ -18,7 +15,7 @@ This file will be produced upon completion of a series of association tests. Eac
 ``CollapseGroupID`` is only present if variants were collapsed into groups (single p-value per collapsed group).
 
 
-Filtered File
+Input
 ------------------------------
 
 This file explains which variants were filtered prior to testing and the reasoning behind the filter. Each line corresponds to a single variant. This file will only be written if "Explain Filter" is checked on the user interface or if ``--explain-filter`` is added when running VikNGS from the command line. The file is tab-separated with the following columns:

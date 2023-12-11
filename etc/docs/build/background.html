@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Output &mdash; PangyPlot 0.1.0 documentation</title>
+  <title>Background &mdash; PangyPlot 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
       <link rel="stylesheet" type="text/css" href="_static/pangyplot.css" />
@@ -23,8 +23,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Power Simulation Package" href="power_calculation.html" />
-    <link rel="prev" title="Association Tests" href="tests.html" /> 
+    <link rel="next" title="Background" href="setup.html" />
+    <link rel="prev" title="Usage" href="usage.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -52,16 +52,13 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="local_build.html">Local Build</a></li>
-<li class="toctree-l1"><a class="reference internal" href="input.html">Input Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="parameters.html">Choosing Parameters</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tests.html">Association Tests</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Output</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Background</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#p-value-file">P-value File</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#filtered-file">Filtered File</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="power_calculation.html">Power Simulation Package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Background</a></li>
 </ul>
 
         </div>
@@ -78,9 +75,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Output</li>
+      <li class="breadcrumb-item active">Background</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/output.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/background.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -88,10 +85,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="output">
-<span id="id1"></span><h1>Output<a class="headerlink" href="#output" title="Permalink to this heading"></a></h1>
+  <span class="target" id="background"></span><section id="id1">
+<h1>Background<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
 <p>VikNGS will output the p-values calculated to a text file in the current directory (i.e. “.”) by default. Output directory can be changed from the user interface or using <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">[DIRECTORY]</span></code> on the command line version.</p>
 <p>In addition to p-values, VikNGS can also produce a file detailing which variants were filtered out prior to testing and an explanation why. In future versions of the software, we hope to provide more types of output in addition to these files.</p>
+<figure class="align-center" id="id2">
+<img alt="Multsample VCF Layout" src="_images/vcf_layout.png" />
+<figcaption>
+<p><span class="caption-text">The general layout of a multi-sample VCF file.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
 <section id="p-value-file">
 <h2>P-value File<a class="headerlink" href="#p-value-file" title="Permalink to this heading"></a></h2>
 <p>This file will be produced upon completion of a series of association tests. Each line corresponds to a tested variant and records the resulting p-value. The file is tab-separated with the following columns:</p>
@@ -118,8 +121,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="tests.html" class="btn btn-neutral float-left" title="Association Tests" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="power_calculation.html" class="btn btn-neutral float-right" title="Power Simulation Package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="setup.html" class="btn btn-neutral float-right" title="Background" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

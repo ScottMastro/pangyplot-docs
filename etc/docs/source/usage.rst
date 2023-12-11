@@ -1,6 +1,7 @@
-.. _input:
+.. include:: substitutions.rst
+.. _usage:
 
-Input Files
+Usage
 ==================================
 
 Quick Summary
@@ -27,7 +28,7 @@ A Variant Call Format (VCF) file is a standard way of storing variant informatio
 
 A multi-sample VCF is formatted identically to a single-sample VCF except it contains an extra set of columns corresponding to sample-specific data.
 
-.. figure:: resources/vcf_layout.png
+.. figure:: _images/vcf_layout.png
    :alt: Multsample VCF Layout
    :align: center
 
