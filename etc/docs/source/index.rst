@@ -14,23 +14,26 @@
 Motivation
 ---------------
 
-Visualization is a fundamental aspect of genomics research, enabling researchers to interpret and analyze data that is typically formatted for efficient computation and storage. A visual interface for navigating large, complex datasets is crucial for detecting patterns and gaining meaningful insights.
+A visual interface is fundamental for detecting patterns and gaining meaningful insights into large, complex genomic datasets.
+Pangenomes typically rely on a graph-based data structure, which is very difficult to navigate without a visualization of the graph topology.
 
-Pangenomes often rely on a graph-based data structure  
+Graph genomes are particularly challenging to analyze because they include billions of base pairs and encompass all the potential variations within them.
+The range of variation size is also large. For instance, examining the relationship between a SNP and a 20kb structural variant represents a 20,000-fold difference in scale.
+
+To overcome these issues, consider the system used for 
 
 .. figure:: _images/graph_analogy.svg
-   :alt: Multsample VCF Layout
+   :alt: Units ➜ Buildings ➜ Streets ➜ Cities ➜ ...
    :align: center
 
-   The general layout of a multi-sample VCF file.
-
+   Physical locations have a hierarchical relationship. The level of detail needed depends on the goal.
  
 
 .. figure:: _images/graph_analogy2.svg
-   :alt: Multsample VCF Layout
+   :alt: Base Pair ➜ SNP ➜ Locus ➜ Structural Variant ➜ ...
    :align: center
 
-   The general layout of a multi-sample VCF file.
+   Genetic variation has a hierarchical relationship. The level of detail needed also depends on the goal.
 
 
 
