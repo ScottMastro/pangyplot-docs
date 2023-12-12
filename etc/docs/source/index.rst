@@ -10,9 +10,13 @@
 
 |tool| is a visualization tool developed for human pangenomic research. Its primary function is to offer visual representations of large graph genomes,  facilitating the exploration and analysis of complex genomic data.
  
-.. figure:: _images/ui_placeholder.png
+
+
+.. figure:: _images/ui_screenshot.png
    :alt: user interface
    :align: center
+
+   Screenshot of |tool|.
 
 
 Motivation

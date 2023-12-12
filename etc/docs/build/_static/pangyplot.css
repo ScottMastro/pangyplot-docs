@@ -16,3 +16,33 @@
 .wy-menu .caption-text {
     color: var(--highlight) !important;
 }
+.wy-nav-side{
+    background: var(--darker-green) !important;
+}
+.wy-nav-content-wrap{
+    background: var(--lighter-green) !important;
+}
+
+/* Override Note/Warning color */
+.admonition-title{
+    background: var(--darker-green) !important;
+    color: var(--highlight) !important;
+}
+.admonition{
+    background: var(--lighter-green) !important;
+}
+.highlight{
+    background: var(--lighter-green) !important;
+}
+
+.custom-header{
+    display:flex;
+    align-items:center;
+    column-gap:10px;
+    margin-bottom: 10px;
+}
+.xxl{
+    font-size:xx-large;
+} .xl{
+    font-size:x-large;
+}

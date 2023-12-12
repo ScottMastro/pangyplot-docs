@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en">
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Implementation &mdash; PangyPlot 0.1.0 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
-      <link rel="stylesheet" type="text/css" href="_static/pangyplot.css" />
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/pangyplot.css" type="text/css" />
+      <link rel="stylesheet" href="_static/fontawesome/css/all.css" type="text/css" />
     <link rel="shortcut icon" href="_static/favicon.svg"/>
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
@@ -104,7 +103,7 @@ This nested structure is computed by BubbleGun.</p>
 </section>
 <section id="back-end-neo4j">
 <h2>Back-end: Neo4j<a class="headerlink" href="#back-end-neo4j" title="Permalink to this heading"></a></h2>
-<p><a class="reference external" href="neo4jurl">Neo4j 🔗</a> is a graph database where data is stored as a series of Nodes and Relationships.
+<p><a class="reference external" href="https://neo4j.com/">Neo4j 🔗</a> is a graph database where data is stored as a series of Nodes and Relationships.
 Neo4j mirrors the stucture of the graph genomes which makes it ideal for storage and queries.</p>
 <p>During setup of PangyPlot, an rGFA file is parsed and the S,L,P,W lines are extracted.
 The S (segment) lines are added to the Neo4j database as nodes with properties that include
@@ -114,7 +113,6 @@ The S (segment) lines are added to the Neo4j database as nodes with properties t
 -end
 -x,y coordinates</p>
 <p>The L (link) lines are added as <code class="docutils literal notranslate"><span class="pre">LINKS_TO</span></code> relationships between two Segment nodes.</p>
-<p>test</p>
 <figure class="align-center">
 <a class="reference internal image-reference" href="_images/neo4j_placeholder.png"><img alt="Neo4j database schema" src="_images/neo4j_placeholder.png" style="width: 500px;" /></a>
 </figure>

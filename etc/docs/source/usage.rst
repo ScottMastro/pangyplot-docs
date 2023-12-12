@@ -4,25 +4,60 @@
 Usage
 ==================================
 
-Quick Summary
----------------
+Choosing a Region
+-----------------------
 
-VikNGS takes 3 different file types as input:
+|tool| provides various options for choosing the range to be visualized. 
 
-- a multi=sample VCF that provides genotype information
-   - genotype information is extracted from **GL** (preferred), **PL**, and **GT** fields
-- a tab-separated sample information text file containing phenotype and covariate information
-   - must be created by user ref:`see column details code<sample_info>` for what this file should contain
-- a BED file to specify the variant collapsing strategy (optional)
-   - genes and exons specified in the file can be used to define regions to collapse upon
-   - can be generated automatically from the `UCSC Table Browser <http://genome.ucsc.edu/cgi-bin/hgTables>`_
+.. figure:: _images/go_button.png
+   :alt: go button
+   :align: center
 
-Below, the different types of files are explained in further detail.-
+   Go section of |tool|
 
-.. _multisample_vcf:
+.. raw:: html
 
-Multi-sample VCF
----------------
+   <p>Each method fills the above box with a set of coordinates, and clicking the <code>Go <i class="fas fa-bolt"></i></code> button initiates the visualization process.
+   Below are the different methods to select a coordinate range.</p>
+
+
+
+Selecting by Coordinates
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: _images/coordinate_selector.png
+   :alt: coordinate selector
+   :align: center
+
+test
+
+Selecting by Chromosome
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: _images/chromosome_selector.png
+   :alt: chromosome selector
+   :align: center
+
+   Screenshot of |tool|.
+
+.. figure:: _images/locus_selector.png
+   :alt: locus selector
+   :align: center
+
+   Screenshot of |tool|.
+
+
+Below, the different types of files are explained in further detail.
+
+Selecting by Gene
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: _images/gene_selector.png
+   :alt: gene selector
+   :align: center
+
+   Screenshot of |tool|.
+
 
 A Variant Call Format (VCF) file is a standard way of storing variant information called from sequencing data. Each row of a VCF file corresponds to a genetic variant (insertion, deletion or substitution) and contains information such as the genomic position of the variant, the confidence in the variant call and many other additional annotations.
 
@@ -98,20 +133,61 @@ When running an association test in VikNGS, different genotype values can potent
 
 .. _sample_info:
 
-Sample Information File
+Colors
 -----------------------
 
-To utilize phenotypic data and sample-specific information, vikNGS requires the user to provide this information in a separate file. This tab-separated file is defined specifically for use in vikNGS. This file should *not* have headers and is expected to contain one sample per line.
-    
-The columns are defined as follows:
-
-Sample ID
-~~~~~~~~~
-Every line in the sample information file should begin with a *unique* sample ID. The only additional requirement is that every sample ID needs to identically match exactly one of the IDs that appear after the **FORMAT** column in the multisample VCF file. This column specifies the relationship between the sample-specific data and the data in the VCF file.
-
-Phenotype
+Color Style
 ~~~~~~~~~~~~~~~~~
-This column contains phenotypic data which will be used to identify association with genotype information.
+
+|tool| provides different methods of coloring the nodes in the visualization. 
+
+.. figure:: _images/color_gradient.png
+   :alt: color gradient
+   :align: center
+
+   Node colors are selected on a 3-color gradient.
+
+Depending on the mode selected, the colors will either be used to form as a continuous gradient/heatmap or will be used as three discrete colors. 
+
+.. raw:: html
+
+   <div class="custom-header"><i class="fa-solid fa-circle-nodes xl"></i> <b>Node Type</b> <code>discrete</code></div>
+
+The color is determined by the type of node, |segment|, |bubble| or |chain|
+
+
+.. raw:: html
+
+   <div class="custom-header"><i class="fa-solid fa-arrows-to-circle xl"></i> <b>Bubble Size</b> <code>continuous</code></div>
+
+The color is determined by the total number of |segment| inside a |bubble| or |chain|. 
+Not to be confused with "length" which is based on the total number of basepairs.
+
+
+.. raw:: html
+
+   <div class="custom-header"><i class="fa-solid fa-arrow-down-short-wide xl"></i> <b>Node Length</b> <code>continuous</code></div>
+
+The color is determined by the total number of basepairs represented by a node. 
+
+.. raw:: html
+
+   <div class="custom-header"><i class="fa-solid fa-shuffle xl"></i> <b>Ref/Alt</b> <code>discrete</code></div>
+
+Reference path and alternative paths are colored differently. This is a 2-color scheme that uses the two ends of the color gradient. 
+
+
+.. raw:: html
+
+   <div class="custom-header"><i class="fa-solid fa-dna xl"></i> <b>GC Content</b> <code>continuous</code></div>
+
+The color is determined by the total GC percentage of all basepairs represented by a node (with the full human genome averaging 41%).
+
+Changing Colors
+~~~~~~~~~~~~~~~~~
+
+
+
 
 .. note:: 
     If looking to find association information between case-control groups, this column is used to specify case-control status. Please designate cases with a 1 and controls with a 0 in this column.

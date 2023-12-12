@@ -57,6 +57,7 @@ html_sidebars = {
 
 html_css_files = [
     'pangyplot.css',
+    'fontawesome/css/all.css',
 ]
 
 # HTMLHelp output.

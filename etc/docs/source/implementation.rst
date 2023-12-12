@@ -29,10 +29,11 @@ This nested structure is computed by BubbleGun.
    :align: center
 
 
+
 Back-end: Neo4j
 ------------------------------
 
-`Neo4j 🔗 <neo4jurl>`_ is a graph database where data is stored as a series of Nodes and Relationships.
+`Neo4j 🔗 <https://neo4j.com/>`_ is a graph database where data is stored as a series of Nodes and Relationships.
 Neo4j mirrors the stucture of the graph genomes which makes it ideal for storage and queries.
 
 During setup of |tool|, an rGFA file is parsed and the S,L,P,W lines are extracted.
