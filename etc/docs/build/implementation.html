@@ -54,8 +54,9 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Implementation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#back-end">Back-end</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#front-end">Front-end</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#back-end-bubblegun">Back-end: BubbleGun</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#back-end-neo4j">Back-end: Neo4j</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#front-end-d3-force-graph">Front-end: D3 Force Graph</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup For Custom Pangenome</a></li>
@@ -87,22 +88,53 @@
              
   <span class="target" id="implementation"></span><section id="id1">
 <h1>Implementation<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
-<p>VikNGS will output the p-values calculated to a text file in the current directory (i.e. “.”) by default. Output directory can be changed from the user interface or using <code class="docutils literal notranslate"><span class="pre">-o</span> <span class="pre">[DIRECTORY]</span></code> on the command line version.</p>
-<p>In addition to p-values, VikNGS can also produce a file detailing which variants were filtered out prior to testing and an explanation why. In future versions of the software, we hope to provide more types of output in addition to these files.</p>
+<section id="back-end-bubblegun">
+<h2>Back-end: BubbleGun<a class="headerlink" href="#back-end-bubblegun" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://github.com/fawaz-dabbaghieh/bubble_gun">BubbleGun 🔗</a> is a tool that identifies topological structures in a GFA file.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Superbubble</span></code> - a acyclic, directed subgraph where nodes <em>s</em> and <em>t</em> are the source and sink nodes, respectively.
+All paths that start at <em>s</em> end up at <em>t</em>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Bubble</span></code> - a specific type of superbubble where <em>s</em> only has two outgoing edges and <em>t</em> has two incoming edges.
+Ex. a simple bialleleic SNP or indel.</p>
+<p><code class="docutils literal notranslate"><span class="pre">BubbleChain</span></code> - a subgraph containing one or more bubbles such that the sink node of one bubble is the soruce node of the next.</p>
+<p>A BubbleChain contains Bubbles. A BubbleChain can also be a part of a larger SuperBubble, which in turn can be inside an even larger SuperBubble or BubbleChain.
+This nested structure is computed by BubbleGun.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/graph_analogy2.svg"><img alt="How the graph is drawn" src="_images/graph_analogy2.svg" width="500px" /></a>
+</figure>
+</section>
+<section id="back-end-neo4j">
+<h2>Back-end: Neo4j<a class="headerlink" href="#back-end-neo4j" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="neo4jurl">Neo4j 🔗</a> is a graph database where data is stored as a series of Nodes and Relationships.
+Neo4j mirrors the stucture of the graph genomes which makes it ideal for storage and queries.</p>
+<p>During setup of PangyPlot, an rGFA file is parsed and the S,L,P,W lines are extracted.
+The S (segment) lines are added to the Neo4j database as nodes with properties that include
+-length
+-chrom
+-start
+-end
+-x,y coordinates</p>
+<p>The L (link) lines are added as <code class="docutils literal notranslate"><span class="pre">LINKS_TO</span></code> relationships between two Segment nodes.</p>
+<p>test</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/neo4j_placeholder.png"><img alt="Neo4j database schema" src="_images/neo4j_placeholder.png" style="width: 500px;" /></a>
+</figure>
+</section>
+<section id="front-end-d3-force-graph">
+<h2>Front-end: D3 Force Graph<a class="headerlink" href="#front-end-d3-force-graph" title="Permalink to this heading"></a></h2>
+<p>PangyPlot uses the <a class="reference external" href="https://github.com/vasturiano/force-graph">D3 Force Graph library 🔗</a> to draw the graph representation.</p>
+<p>This library is able to render the graph given a set of nodes and links.
+In PangyPlot, segments of sequence are represented by nodes.
+These segments can have variable length and it was important to capture the length information in the rendering of the graph.
+PangyPlot splits up longer segments into a series of connected D3 nodes, using thickly drawn links to give the illusion of length.</p>
 <figure class="align-center" id="id2">
-<img alt="Multsample VCF Layout" src="_images/vcf_layout.png" />
+<a class="reference internal image-reference" href="_images/graph_explain.svg"><img alt="How the graph is drawn" src="_images/graph_explain.svg" width="500px" /></a>
 <figcaption>
-<p><span class="caption-text">The general layout of a multi-sample VCF file.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-text">How the stylized segments appear (top) versus how they structured from the perspective of the D3 engine (bottom).</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<section id="back-end">
-<h2>Back-end<a class="headerlink" href="#back-end" title="Permalink to this heading"></a></h2>
-<p>PangyPlot uses the <a class="reference external" href="https://github.com/vasturiano/force-graph">D3 Force Graph library 🔗</a> and <a class="reference external" href="https://github.com/fawaz-dabbaghieh/bubble_gun">BubbleGun 🔗</a></p>
-<p><code class="docutils literal notranslate"><span class="pre">Chromosome</span>&#160; <span class="pre">Position</span>&#160; <span class="pre">Reference</span> <span class="pre">Alternative</span> <span class="pre">P-value</span> <span class="pre">TestName</span>&#160; <span class="pre">CollapseGroupID</span></code></p>
-<p><code class="docutils literal notranslate"><span class="pre">CollapseGroupID</span></code> is only present if variants were collapsed into groups (single p-value per collapsed group).</p>
-</section>
-<section id="front-end">
-<h2>Front-end<a class="headerlink" href="#front-end" title="Permalink to this heading"></a></h2>
+<p>For example, Segments 426 and 427 above represent a SNP, and are drawn with a single D3 node.
+In contrast, Segment 428 is 932 base pairs long and is drawn with 9 nodes, internally named 428#0 through 428#8.</p>
+<p>#todo forces</p>
 </section>
 </section>
 

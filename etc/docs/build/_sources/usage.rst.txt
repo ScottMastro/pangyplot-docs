@@ -1,5 +1,5 @@
-.. include:: substitutions.rst
 .. _usage:
+.. include:: substitutions.rst
 
 Usage
 ==================================
