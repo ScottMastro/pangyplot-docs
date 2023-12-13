@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Implementation &mdash; PangyPlot 0.1.0 documentation</title>
+  <title>Implementation Details &mdash; PangyPlot 0.1.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/pangyplot.css" type="text/css" />
@@ -52,10 +52,25 @@
               <p class="caption" role="heading"><span class="caption-text">Table of Contents</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#back-end-bubblegun">Back-end: BubbleGun</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#back-end-neo4j">Back-end: Neo4j</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#front-end-d3-force-graph">Front-end: D3 Force Graph</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Implementation Details</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#back-end">Back-end</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#graph-structures-bubblegun">Graph Structures: BubbleGun</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#structure-definitions">Structure Definitions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#layout-odgi">Layout: odgi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#database-neo4j">Database: Neo4j</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#schema">Schema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#relationships">Relationships</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#front-end">Front-end</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rendering-d3-force-graph">Rendering: D3 Force Graph</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="setup.html">Setup For Custom Pangenome</a></li>
@@ -75,7 +90,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Implementation</li>
+      <li class="breadcrumb-item active">Implementation Details</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/implementation.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -85,54 +100,315 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <span class="target" id="implementation"></span><section id="id1">
-<h1>Implementation<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h1>
-<section id="back-end-bubblegun">
-<h2>Back-end: BubbleGun<a class="headerlink" href="#back-end-bubblegun" title="Permalink to this heading"></a></h2>
-<p><a class="reference external" href="https://github.com/fawaz-dabbaghieh/bubble_gun">BubbleGun 🔗</a> is a tool that identifies topological structures in a GFA file.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Superbubble</span></code> - a acyclic, directed subgraph where nodes <em>s</em> and <em>t</em> are the source and sink nodes, respectively.
+  <span class="target" id="implementation"></span><section id="implementation-details">
+<h1>Implementation Details<a class="headerlink" href="#implementation-details" title="Permalink to this heading"></a></h1>
+<section id="back-end">
+<h2>Back-end<a class="headerlink" href="#back-end" title="Permalink to this heading"></a></h2>
+<section id="graph-structures-bubblegun">
+<h3>Graph Structures: BubbleGun<a class="headerlink" href="#graph-structures-bubblegun" title="Permalink to this heading"></a></h3>
+<p><a class="reference external" href="https://github.com/fawaz-dabbaghieh/bubble_gun">BubbleGun 🔗</a> is a tool that identifies topological structures in a graph (GFA file).
+These topological structures can be nested within each other, forming a hierarchical chain of superstructures.
+The BubbleGun source code has been integrated into the PangyPlot back-end code.</p>
+<section id="structure-definitions">
+<h4>Structure Definitions<a class="headerlink" href="#structure-definitions" title="Permalink to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">Segment</span></code> - a contiguous chunk of sequence with no variation. Basic nodes that make up a graph genome.</p>
+<p><code class="docutils literal notranslate"><span class="pre">SuperBubble</span></code> - an acyclic, directed subgraph where nodes <em>s</em> and <em>t</em> are the source and sink nodes, respectively.
 All paths that start at <em>s</em> end up at <em>t</em>.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Bubble</span></code> - a specific type of superbubble where <em>s</em> only has two outgoing edges and <em>t</em> has two incoming edges.
+<p><code class="docutils literal notranslate"><span class="pre">Bubble</span></code> - a specific type of <code class="docutils literal notranslate"><span class="pre">SuperBubble</span></code> where there are only two disjoint paths between <em>s</em> and <em>t</em>.
 Ex. a simple bialleleic SNP or indel.</p>
-<p><code class="docutils literal notranslate"><span class="pre">BubbleChain</span></code> - a subgraph containing one or more bubbles such that the sink node of one bubble is the soruce node of the next.</p>
-<p>A BubbleChain contains Bubbles. A BubbleChain can also be a part of a larger SuperBubble, which in turn can be inside an even larger SuperBubble or BubbleChain.
-This nested structure is computed by BubbleGun.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="_images/graph_analogy2.svg"><img alt="How the graph is drawn" src="_images/graph_analogy2.svg" width="500px" /></a>
+<p><code class="docutils literal notranslate"><span class="pre">BubbleChain</span></code> - a subgraph containing one or more <code class="docutils literal notranslate"><span class="pre">Bubble</span></code> such that the sink node of one is the source node of the next.</p>
+<p>The figure below is from the <a class="reference external" href="https://doi.org/10.1093/bioinformatics/btac448">BubbleGun publication 🔗</a>.</p>
+<figure class="align-center" id="id1">
+<img alt="figure from BubbleGun paper" src="_images/bubblegun_figure.png" />
+<figcaption>
+<p><span class="caption-text">A short <code class="docutils literal notranslate"><span class="pre">BubbleChain</span></code> composed of two simple SNP <code class="docutils literal notranslate"><span class="pre">Bubble</span></code> structures and one <code class="docutils literal notranslate"><span class="pre">SuperBubble</span></code> with another <code class="docutils literal notranslate"><span class="pre">Bubble</span></code> nested inside.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
 </figure>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These definitions are used by BubbleGun. In PangyPlot, we refer to both types of bubbles simply as a <code class="docutils literal notranslate"><span class="pre">Bubble</span></code>.
+We define subtypes <code class="docutils literal notranslate"><span class="pre">simple</span></code> and <code class="docutils literal notranslate"><span class="pre">super</span></code> to differentiate between a <code class="docutils literal notranslate"><span class="pre">Bubble</span></code> and a <code class="docutils literal notranslate"><span class="pre">SuperBubble</span></code>, respectively.
+We also refer to a <code class="docutils literal notranslate"><span class="pre">BubbleChain</span></code> as simply <code class="docutils literal notranslate"><span class="pre">Chain</span></code>.</p>
+</div>
 </section>
-<section id="back-end-neo4j">
-<h2>Back-end: Neo4j<a class="headerlink" href="#back-end-neo4j" title="Permalink to this heading"></a></h2>
+</section>
+<section id="layout-odgi">
+<h3>Layout: odgi<a class="headerlink" href="#layout-odgi" title="Permalink to this heading"></a></h3>
+<p>PangyPlot relies on <a class="reference external" href="https://github.com/pangenome/odgi">odgi 🔗</a> to calculate the 2D layout of nodes.
+The rGFA file is first converted into odgi format <code class="docutils literal notranslate"><span class="pre">*.og</span></code>.</p>
+<p>From the odgi documentation:</p>
+<blockquote>
+<div><p>The <a class="reference external" href="https://pangenome.github.io/odgi.github.io/rst/commands/odgi_layout.html">odgi layout 🔗</a> command computes 2D layouts of the graph using stochastic gradient descent (SGD).
+The input graph must be sorted and id-compacted. The algorithm itself is described in
+<a class="reference external" href="https://arxiv.org/abs/1710.04626">Graph Drawing by Stochastic Gradient Descent 🔗</a>.
+The force-directed graph drawing algorithm minimizes the graph’s energy function or stress level.</p>
+</div></blockquote>
+<p>The command used to calculate the layout:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>odgi layout -i <span class="si">${</span><span class="nv">INPUT</span><span class="si">}</span>.og -o <span class="si">${</span><span class="nv">OUTPUT</span><span class="si">}</span>.lay -T <span class="si">${</span><span class="nv">OUTPUT</span><span class="si">}</span>.lay.tsv
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">*.lay.tsv</span></code> output is structured as follows:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>idx</p></th>
+<th class="head"><p>X</p></th>
+<th class="head"><p>Y</p></th>
+<th class="head"><p>component</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>1000</p></td>
+<td><p>12547.3115187589</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>165426</p></td>
+<td><p>10586.0915549587</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>165426</p></td>
+<td><p>7320.81894996611</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>165427</p></td>
+<td><p>14814.159085348</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>165427</p></td>
+<td><p>14425.5419673736</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>165445</p></td>
+<td><p>15525.0135879779</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>165445</p></td>
+<td><p>12244.877453525</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>165446</p></td>
+<td><p>12979.6128977908</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<p>For each <code class="docutils literal notranslate"><span class="pre">S</span></code> line in the rGFA file, two coordinate pairs are calculate, representing the coordinates for the start position and end position of each <code class="docutils literal notranslate"><span class="pre">Segment</span></code>.
+For example, for the first <code class="docutils literal notranslate"><span class="pre">S</span></code> line, the start position is given by line <code class="docutils literal notranslate"><span class="pre">idx</span> <span class="pre">=</span> <span class="pre">0</span></code> and the end position by <code class="docutils literal notranslate"><span class="pre">idx</span> <span class="pre">=</span> <span class="pre">1</span></code>.</p>
+</section>
+<section id="database-neo4j">
+<h3>Database: Neo4j<a class="headerlink" href="#database-neo4j" title="Permalink to this heading"></a></h3>
 <p><a class="reference external" href="https://neo4j.com/">Neo4j 🔗</a> is a graph database where data is stored as a series of Nodes and Relationships.
-Neo4j mirrors the stucture of the graph genomes which makes it ideal for storage and queries.</p>
-<p>During setup of PangyPlot, an rGFA file is parsed and the S,L,P,W lines are extracted.
-The S (segment) lines are added to the Neo4j database as nodes with properties that include
--length
--chrom
--start
--end
--x,y coordinates</p>
-<p>The L (link) lines are added as <code class="docutils literal notranslate"><span class="pre">LINKS_TO</span></code> relationships between two Segment nodes.</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="_images/neo4j_placeholder.png"><img alt="Neo4j database schema" src="_images/neo4j_placeholder.png" style="width: 500px;" /></a>
+Neo4j mirrors the stucture of the graph genomes which makes it ideal for storage and queries.
+During setup of PangyPlot, an rGFA file is parsed and the <code class="docutils literal notranslate"><span class="pre">S</span></code>, <code class="docutils literal notranslate"><span class="pre">L</span></code>, <code class="docutils literal notranslate"><span class="pre">P</span></code>, <code class="docutils literal notranslate"><span class="pre">W</span></code> lines are extracted.
+<code class="docutils literal notranslate"><span class="pre">Bubble</span></code> and <code class="docutils literal notranslate"><span class="pre">Chain</span></code> superstructures are enumerated by BubbleGun.
+Layout positions are calculated by odgi. These are all fed into the Neo4j database.</p>
+<section id="schema">
+<h4>Schema<a class="headerlink" href="#schema" title="Permalink to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">Segment</span></code> - The <code class="docutils literal notranslate"><span class="pre">S</span></code> lines from the rGFA file. They have these properties:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>&lt;id&gt;</strong></p></td>
+<td><p>integer</p></td>
+<td><p>Internal Neo4j ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>id</strong></p></td>
+<td><p>integer</p></td>
+<td><p>ID from rGFA file.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>chrom</strong></p></td>
+<td><p>string</p></td>
+<td><p>Structured as <code class="docutils literal notranslate"><span class="pre">genome_id#chromosome_id</span></code>. Optional.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>start</strong></p></td>
+<td><p>integer</p></td>
+<td><p>Start position with respect to reference genome. Optional.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>end</strong></p></td>
+<td><p>integer</p></td>
+<td><p>End position with respect to reference genome. Optional.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>sequence</strong></p></td>
+<td><p>string</p></td>
+<td><p>DNA sequence, blank if node represents a deletion.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>x1</strong></p></td>
+<td><p>float</p></td>
+<td><p>Layout x-coordinate for start position.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>y1</strong></p></td>
+<td><p>float</p></td>
+<td><p>Layout y-coordinate for start position.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>x2</strong></p></td>
+<td><p>float</p></td>
+<td><p>Layout x-coordinate for end position.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>y2</strong></p></td>
+<td><p>float</p></td>
+<td><p>Layout y-coordinate for end position.</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Bubble</span></code> - Identified by BubbleGun. They have these properties:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>&lt;id&gt;</strong></p></td>
+<td><p>integer</p></td>
+<td><p>Internal Neo4j ID.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>id</strong></p></td>
+<td><p>integer</p></td>
+<td><p>ID from BubbleGun.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>subtype</strong></p></td>
+<td><p>string</p></td>
+<td><p>To define different subtypes, ex. <code class="docutils literal notranslate"><span class="pre">simple</span></code>, <code class="docutils literal notranslate"><span class="pre">super</span></code>, etc. Optional.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>n</strong></p></td>
+<td><p>integer</p></td>
+<td><p>Number of nodes inside the structure.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>size</strong></p></td>
+<td><p>integer</p></td>
+<td><p>Total sum of the sequence length of every node inside the structure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>chrom</strong></p></td>
+<td><p>string</p></td>
+<td><p>Structured as <code class="docutils literal notranslate"><span class="pre">genome_id#chromosome_id</span></code>. Optional.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>start</strong></p></td>
+<td><p>integer</p></td>
+<td><p>Min start position of every node inside the structure. Optional.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>end</strong></p></td>
+<td><p>integer</p></td>
+<td><p>Max end position of every node inside the structure. Optional.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>x</strong></p></td>
+<td><p>float</p></td>
+<td><p>Layout x-coordinate, based on center of mass (ie. sequence length).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>y</strong></p></td>
+<td><p>float</p></td>
+<td><p>Layout y-coordinate, based on center of mass (ie. sequence length).</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>x1</strong></p></td>
+<td><p>float</p></td>
+<td><p>Min x-coordinate of every node inside the structure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>y1</strong></p></td>
+<td><p>float</p></td>
+<td><p>Min y-coordinate of every node inside the structure.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>x2</strong></p></td>
+<td><p>float</p></td>
+<td><p>Max x-coordinate of every node inside the structure.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>y2</strong></p></td>
+<td><p>float</p></td>
+<td><p>Max y-coordinate of every node inside the structure.</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">Chain</span></code> - Identified by BubbleGun. They have the same properties as above.</p>
+</section>
+<section id="relationships">
+<h4>Relationships<a class="headerlink" href="#relationships" title="Permalink to this heading"></a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">LINKS_TO</span></code> : The <code class="docutils literal notranslate"><span class="pre">L</span></code> lines from the rGFA.</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">Segment</span></code> — <code class="docutils literal notranslate"><span class="pre">LINKS_TO</span></code> → <code class="docutils literal notranslate"><span class="pre">Segment</span></code></p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">END</span></code> : The source or sink node of a <code class="docutils literal notranslate"><span class="pre">Bubble</span></code> or <code class="docutils literal notranslate"><span class="pre">Chain</span></code>.</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">Segment</span></code> — <code class="docutils literal notranslate"><span class="pre">END</span></code> → <code class="docutils literal notranslate"><span class="pre">Bubble</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">Segment</span></code> ← <code class="docutils literal notranslate"><span class="pre">END</span></code> — <code class="docutils literal notranslate"><span class="pre">Bubble</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">Segment</span></code> — <code class="docutils literal notranslate"><span class="pre">END</span></code> → <code class="docutils literal notranslate"><span class="pre">Chain</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">Segment</span></code> ← <code class="docutils literal notranslate"><span class="pre">END</span></code> — <code class="docutils literal notranslate"><span class="pre">Chain</span></code></p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">INSIDE</span></code> : Nodes that are part of a larger superstructure.</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">Segment</span></code> — <code class="docutils literal notranslate"><span class="pre">INSIDE</span></code> → <code class="docutils literal notranslate"><span class="pre">Bubble</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">Bubble</span></code> — <code class="docutils literal notranslate"><span class="pre">INSIDE</span></code> → <code class="docutils literal notranslate"><span class="pre">Chain</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">Segment</span></code> — <code class="docutils literal notranslate"><span class="pre">INSIDE</span></code> → <code class="docutils literal notranslate"><span class="pre">Chain</span></code></p>
+</div></blockquote>
+<p><code class="docutils literal notranslate"><span class="pre">PARENT</span></code> : Specifically, <code class="docutils literal notranslate"><span class="pre">Chain</span></code> that are part of a larger superstructure.</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">Chain</span></code> — <code class="docutils literal notranslate"><span class="pre">PARENT</span></code> → <code class="docutils literal notranslate"><span class="pre">Bubble</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">Chain</span></code> — <code class="docutils literal notranslate"><span class="pre">PARENT</span></code> → <code class="docutils literal notranslate"><span class="pre">Chain</span></code></p>
+</div></blockquote>
+</section>
+<section id="example">
+<h4>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h4>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/neo4j_bubble.svg"><img alt="Neo4j database schema" src="_images/neo4j_bubble.svg" width="600px" /></a>
+<figcaption>
+<p><span class="caption-text">Showing <code class="docutils literal notranslate"><span class="pre">Segment</span></code> nodes as orange and <code class="docutils literal notranslate"><span class="pre">Bubble</span></code> nodes as red.
+A series of substitution variants alongside a larger deletion variant.
+The node at the bottom is a “null” <code class="docutils literal notranslate"><span class="pre">Segment</span></code> that represents a deletion allele.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id3">
+<a class="reference internal image-reference" href="_images/neo4j_bubblechain.svg"><img alt="Neo4j database schema" src="_images/neo4j_bubblechain.svg" width="600px" /></a>
+<figcaption>
+<p><span class="caption-text">Hiding any <code class="docutils literal notranslate"><span class="pre">Segment</span></code> nodes that were inside a <code class="docutils literal notranslate"><span class="pre">Bubble</span></code>.
+Showing <code class="docutils literal notranslate"><span class="pre">Chain</span></code> nodes as light brown.
+Two <code class="docutils literal notranslate"><span class="pre">Chain</span></code> are formed, separated by the large deletion allele.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id4">
+<a class="reference internal image-reference" href="_images/neo4j_superbubble.svg"><img alt="Neo4j database schema" src="_images/neo4j_superbubble.svg" width="600px" /></a>
+<figcaption>
+<p><span class="caption-text">Hiding any nodes that were inside a <code class="docutils literal notranslate"><span class="pre">Chain</span></code>.
+The left <code class="docutils literal notranslate"><span class="pre">Chain</span></code> is inside a larger <code class="docutils literal notranslate"><span class="pre">Bubble</span></code>, formed by the deletion allele.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
 </figure>
 </section>
-<section id="front-end-d3-force-graph">
-<h2>Front-end: D3 Force Graph<a class="headerlink" href="#front-end-d3-force-graph" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+<section id="front-end">
+<h2>Front-end<a class="headerlink" href="#front-end" title="Permalink to this heading"></a></h2>
+<section id="rendering-d3-force-graph">
+<h3>Rendering: D3 Force Graph<a class="headerlink" href="#rendering-d3-force-graph" title="Permalink to this heading"></a></h3>
 <p>PangyPlot uses the <a class="reference external" href="https://github.com/vasturiano/force-graph">D3 Force Graph library 🔗</a> to draw the graph representation.</p>
 <p>This library is able to render the graph given a set of nodes and links.
 In PangyPlot, segments of sequence are represented by nodes.
 These segments can have variable length and it was important to capture the length information in the rendering of the graph.
 PangyPlot splits up longer segments into a series of connected D3 nodes, using thickly drawn links to give the illusion of length.</p>
-<figure class="align-center" id="id2">
+<figure class="align-center" id="id5">
 <a class="reference internal image-reference" href="_images/graph_explain.svg"><img alt="How the graph is drawn" src="_images/graph_explain.svg" width="500px" /></a>
 <figcaption>
-<p><span class="caption-text">How the stylized segments appear (top) versus how they structured from the perspective of the D3 engine (bottom).</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+<p><span class="caption-text">How the stylized <code class="docutils literal notranslate"><span class="pre">Segment</span></code> appear (top) versus how they structured from the perspective of the D3 engine (bottom).</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>For example, Segments 426 and 427 above represent a SNP, and are drawn with a single D3 node.
-In contrast, Segment 428 is 932 base pairs long and is drawn with 9 nodes, internally named 428#0 through 428#8.</p>
-<p>#todo forces</p>
+<p>For example, <code class="docutils literal notranslate"><span class="pre">Segment</span> <span class="pre">426</span></code> and <code class="docutils literal notranslate"><span class="pre">Segment</span> <span class="pre">427</span></code> represent a SNP, and are drawn with a single D3 node.
+In contrast, <code class="docutils literal notranslate"><span class="pre">Segment</span> <span class="pre">428</span></code> is 932 base pairs long and is drawn with 9 nodes, internally named <code class="docutils literal notranslate"><span class="pre">428#0</span></code> through <code class="docutils literal notranslate"><span class="pre">428#8</span></code>.</p>
+<p>#todo forces
+#todo annotations</p>
+</section>
 </section>
 </section>
 

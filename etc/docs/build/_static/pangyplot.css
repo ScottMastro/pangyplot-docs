@@ -46,3 +46,22 @@
 } .xl{
     font-size:x-large;
 }
+
+
+blockquote{
+    border-left: solid var(--dark-green);
+    background: var(--lighter-green);
+    padding-left: 24px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-left: 0px !important;
+    font-style: italic;
+}
+
+blockquote p {
+    margin: 0;
+}
+
+code.literal{
+    color: var(--dark-green) !important;
+}

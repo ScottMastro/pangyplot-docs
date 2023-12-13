@@ -13,7 +13,7 @@ Choosing a Region
    :alt: go button
    :align: center
 
-   Go section of |tool|
+   **Go** section of |tool|.
 
 .. raw:: html
 
@@ -25,127 +25,166 @@ Choosing a Region
 Selecting by Coordinates
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+The simplest way to select a range - directly by reference coordinate.
+
 .. figure:: _images/coordinate_selector.png
    :alt: coordinate selector
    :align: center
 
-test
+   **Select by Reference Coordinate** section of |tool|.
+
 
 Selecting by Chromosome
 ~~~~~~~~~~~~~~~~~~~~~~~~
+
+Range selection can be done by choosing a chromosome and highlighting a region.
 
 .. figure:: _images/chromosome_selector.png
    :alt: chromosome selector
    :align: center
 
-   Screenshot of |tool|.
+   **Chromosome Selector** section of |tool|.
+
+By default, |tool| assumes a standard set of human chromosomes. Any non-canonical chromosome can be found in the ``Other`` dropdown box.
+Only one chromosome can be highlighted at a time.
+
 
 .. figure:: _images/locus_selector.png
    :alt: locus selector
    :align: center
 
-   Screenshot of |tool|.
+   **Locus Selector** section of |tool|.
 
-
-Below, the different types of files are explained in further detail.
+A cytoband display of the highlighted chromosome is rendered. Clicking and dragging along the chromosome will select a specific region.
+The coordinates of this region populates the **Go** section.
 
 Selecting by Gene
 ~~~~~~~~~~~~~~~~~~~~~~~~
+
+A gene search bar is included as a method to query for a particular region. Gene names and Ensembl IDs are indexed for search.
+The gene annotations are sourced from `GENCODE 🔗 <https://www.gencodegenes.org/human/>`_ but if using a custom pangnome, any GFF3 file can be indexed for search.
 
 .. figure:: _images/gene_selector.png
    :alt: gene selector
    :align: center
 
-   Screenshot of |tool|.
+   **Select by Gene** section of |tool|.
 
+Viewing the Pangenome
+-----------------------
 
-A Variant Call Format (VCF) file is a standard way of storing variant information called from sequencing data. Each row of a VCF file corresponds to a genetic variant (insertion, deletion or substitution) and contains information such as the genomic position of the variant, the confidence in the variant call and many other additional annotations.
+Rendering
+~~~~~~~~~~~~~~~~~
 
-A multi-sample VCF is formatted identically to a single-sample VCF except it contains an extra set of columns corresponding to sample-specific data.
+.. figure:: _images/segment_node.png
+   :alt: segment
+   :align: center
+   :height: 200px
 
-.. figure:: _images/vcf_layout.png
-   :alt: Multsample VCF Layout
+   A |segment|.
+
+A |segment| from the rGFA file (``S`` line). 
+A single chunk of sequence, has reference coordinates if on the reference path.
+Links show possible paths through the pangenome (the ``L`` lines from the rGFA file).
+
+.. figure:: _images/bubble_node.png
+   :alt: bubble
+   :align: center
+   :height: 200px
+
+   Left shows a |bubble|, right shows the contents inside.
+
+Hides an acyclic subgraph of branching paths that start at one |segment| and all end at another.
+Can be |simple| if there are only two disjoint paths between the source and sink nodes, otherwise it is classified as |super|.
+
+.. figure:: _images/chain_node.png
+   :alt: bubble chain
+   :align: center
+   :height: 200px
+
+   Left shows the |chain|, right shows the contents inside.
+
+A |chain| is a series of connected |bubble|.
+
+Actions
+~~~~~~~~~~~~~~~~~
+
+.. figure:: _images/highlight_node.png
+   :alt: highlighting a node
    :align: center
 
-   The general layout of a multi-sample VCF file.
+   Hovering over a node highlights it and shows information.
 
-The first set of lines in a VCF file make up the header and are denoted by the characters *##*. The header includes information about the data source and how the VCF file was constructed. This information is ignored when by VikNGS. The last line of the header is denoted with a single *#* and includes the column names in addition to a unique identifier for every sample. The first nine columns must be (tab-delimited, in order) **CHROM**, **POS**, **ID**, **REF**, **ALT**, **QUAL**, **FILTER**, **INFO** and **FORMAT**. Every subsequent value is expected to be a unique sample identifier.
 
-.. code-block:: python
-   :caption: *Example of a multi-sample VCF*
+.. figure:: _images/highlight_node.png
+   :alt: dragging a node
+   :align: center
 
-    ##fileformat=VCFv4.1
-    ##FILTER=<ID=PASS,Description="All filters passed">
-    ##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
-    ##FORMAT=<ID=GL,Number=.,Type=Integer,Description="Genotype Likelihood">
-    ##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods">
-    #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	SAMPLE_1_ID	SAMPLE_2_ID	...
-      22	160036	snp_1	A	C	.	PASS	.	GT:PL:GL	0/0:0,15,73:.	1/1:50,8,0:-5,-0.84,-0.07
-      22	160408	snp_2	T	C	.	PASS	.	GT:PL	./.:.	0/0:0,36,248
-      22	160612	snp_2	C	G	.	PASS	.	GT:GL	0/1:-0.48,-0.48,-0.48	1/1::-4.4,-0.27,-0.33
+   Clicking and dragging a node moves it around.
 
-.. note::
- While parsing the file only SNPs will be retained (a single A, T, C, or G in both the REF and ALT columns). Multiallelic sites are also currently ignored by VikNGS.
 
-Variant Specific Columns
-~~~~~~~~~~~~~~~~~~~~~~~~
+.. figure:: _images/bubble_node.png
+   :alt: popping a bubble
+   :align: center
+   :height: 200px
 
-The first nine columns contain information relevant to the called variants.
+   Clicking on a |bubble| or |chain| node pops it open.
 
-The first two required columns (**CHROM**, **POS**) specify the genomic coordinates of the variant. The first base pair of a chromosome is denoted as position 1. **CHROM** is treated as a unique identifier for a chromosome. **POS** is expected to be a positive integer value.
 
-The third column (**ID**) assigns an identifier to each variant.
 
-The forth and fifth columns (**REF**, **ALT**) refer to reference alleles derived from a reference genome and alternative alleles observed in the sequencing data. These columns specify whether the variant is an indel or a SNP. 
+Annotations
+~~~~~~~~~~~~~~~~~
 
-The sixth column (**QUAL**) provides a Phred-scaled probability that the called base is correct. This field is ignored and not used by vikNGS.
+The gene annotations are sourced from `GENCODE 🔗 <https://www.gencodegenes.org/human/>`_ but if using a custom pangnome, any GFF3 file can be used to annotate genes.
 
-The seventh column (**FILTER**) Indicates whether or not the variant has passed all of the quality control checks present in the variant calling pipeline that produced the VCF file. The value of this field will be **PASS** if the variant passed all of the filters and will be “.” if no checks were applied.
+.. figure:: _images/gene_annotation.png
+   :alt: gene annotation
+   :align: center
 
-The eighth column (**INFO**) contains additional variant annotations, delimited by a semicolon. This field is ignored and not used by vikNGS.
-
-The ninth column (**FORMAT**) specifies the ordering of sample-level annotations, delimited by a colon. All subsequent sample-specific columns will provide values for each annotation, placed in the same order and also delimited by a colon. In particular, the ordering of **GT**, **GL**, and **PL** is extracted from this column.
-
-Sample Specific Columns
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-All columns following the **FORMAT** column should correspond to a single sample. The header of each column specifies a unique identifier for each sample. Values in subsequent columns are colon separated and are ordered with respect to the labels in the **FORMAT** column. The following values are extracted for each sample.
-
-**GT** (Genotype): A pair of values specifying the predicted genotype for a specific sample (0/0 homozygous reference, 0/1 heterozygous, 1/1 homozygous alternative).
-
-**GL** (Genotype likelihood): A set of three numbers indicating the log-scaled genotype probability of all three possible genotypes. Each number corresponds to the value for homozygous reference, heterozygous, and homozygous alternative, respectively.
-
-**PL** (Phred-scaled likelihood): A set of three integers indicating the Phred-scaled probability of all three possible genotypes (homozygous reference, heterozygous, and homozygous alternative). These values are normalized since all the values are relative to the most likely genotype (and are therefore not probabilities).
-
-.. note::
-    **GL** and **PL** are both ways of representing genotype probabilities. Both values can be used to derive genotype probabilities but because **PL** is a rounded integer, **GL** is more accurate.
-
-    :math:`genotype\_probability=10^{\textbf{GL}}=10^{-\textbf{PL}/10}`
-
-    :math:`-10\textbf{GL}=\textbf{PL}`
-
-When running an association test in VikNGS, different genotype values can potentially be used. If the "Use VCF GT" option is checked, VikNGS will extract the **GT** value only and convert the value to a genotype {0, 1, 2}. If "Use Expected GT" is checked, the software will attempt to parse the **GL** values from each sample first. If **GL** values are missing or are formatted incorrectly, then the **PL** values will be extracted. If parsing of both **GL** and **PL** values fail, the **GT** values will be extracted. An expected genotype value [0,2] will be calculated from the extracted column. If "Use GT calls" is chosen, genotype probabilities will be extracted in the same way the expected gentype method but a hard genotype call {0, 1, 2} will be made instead of calculating the expected value. 
-
- If the relevant information is not present for a given variant, that variant will be skipped and not included in analysis.
-
-.. note::
-    Note that if **GT** values are indicated as “missing” (ex. ./.) then the variant will be skipped even if values for **GL** and **PL** are present.
-
-.. _sample_info:
+   A gene annotation.
 
 Colors
 -----------------------
 
-Color Style
+Color Selection
 ~~~~~~~~~~~~~~~~~
 
-|tool| provides different methods of coloring the nodes in the visualization. 
+|tool| provides different methods of coloring the nodes in the visualization.
+Node colors are selected on a 3-color gradient.
 
 .. figure:: _images/color_gradient.png
    :alt: color gradient
    :align: center
 
-   Node colors are selected on a 3-color gradient.
+   **Node Color** section of |tool|. 
+
+.. figure:: _images/preset_colors.png
+   :alt: preset colors
+   :align: center
+
+   **Preset Color** section of |tool|.
+
+|tool| has a set of built-in color palettes that can be selected from. 
+Color palette can be manually changed by clicking on each color box.
+
+.. note:: 
+    Some palettes are better for discrete colors and some are better for heatmap gradients.
+
+.. note:: 
+    An attempt was made to provide multiple colorblind-friendly palettes but not all of them are guaranteed to be safe.
+
+
+.. figure:: _images/other_colors.png
+   :alt: link and background colors
+   :align: center
+
+   **Link Color** and **Background Color** section of |tool|.
+
+Additionally, link and background colors can be manually changed.
+
+
+Color Style
+~~~~~~~~~~~~~~~~~
 
 Depending on the mode selected, the colors will either be used to form as a continuous gradient/heatmap or will be used as three discrete colors. 
 
@@ -182,72 +221,4 @@ Reference path and alternative paths are colored differently. This is a 2-color 
    <div class="custom-header"><i class="fa-solid fa-dna xl"></i> <b>GC Content</b> <code>continuous</code></div>
 
 The color is determined by the total GC percentage of all basepairs represented by a node (with the full human genome averaging 41%).
-
-Changing Colors
-~~~~~~~~~~~~~~~~~
-
-
-
-
-.. note:: 
-    If looking to find association information between case-control groups, this column is used to specify case-control status. Please designate cases with a 1 and controls with a 0 in this column.
-
-Group ID
-~~~~~~~~
-Use this column to specify if samples are from different groups or studies. Any samples with the same value in the column will be put in the same group.
-
-Read Depth
-~~~~~~~~~~
-If using the expected genotype method, the score test calculates the variance for each group separately and needs to be aware of which groups are high read depth versus low read depth. The read depth of each sample must be specified in this column. The numerical read depth value (ex. 32) can be provided for each sample or simply a letter specifying whether a sample is from a high or low sequencing run (H = high, L = low). Note that all samples with a shared group ID must also share high/low read depth status. Therefore, the first read depth value encountered for a group will be applied to all members of that group.
-
-Covariates
-~~~~~~~~~~
-The remaining columns are used to specify covariates. Covariates can either be continuous or categorical. If every value in a covariate column is numeric, the column will be treated as a continuous covariate. If a single non-numeric value is identified, the covariate will be treated as categorical and a new dummy covariate will be made for EVERY unique value (high cardinality categorical variables can result in significantly longer computation time).
-
-.. _bed_file:
-
-BED File (Optional)
------------------------
-
-Elucidation of associated rare variants can be challenging because the frequency of the associated allele can be extremely low. To improve the power of statistical tests that identify rare alleles, it is necessary to collapse a group of linked variants and perform the association test on a genetic region rather than individual SNPs. For rare variant association in vikiNGS, a collapsing strategy must be specified.
-
-There are three types of collapsing strategies available:
-- Collapse every \\(k\\)
-- Collapse by gene
-- Collapse by exon
-
-By default, the variants will be read and filtered from an input VCF file. After the filtering step, the first \\(k\\)th variants will be collapsed together, followed by the next set of \\(k\\) non-overlapping variants and so on (\\(k=5\\) by default).
-
-To collapse variants in a more biologically relevant way, a BED file must be provided specifying the collapsible regions. A BED file is a tab-delimited table which describes genomic features intended to be used for visualization in a genome browser. The format is specified by UCSC Genome Bioinformatics, detailed information can be found on their `web page <https://genome.ucsc.edu/FAQ/FAQformat.html>`_ web page. Every line describes a single region as follows
-
-The first three columns specify the gene 
-
-1. **chrom** - The name of the chromosome matching the first column in the VCF file.
-2. **chromStart** - The starting position of the gene on the chromosome (starting from 0)
-3. **chromEnd** - The ending position of the gene on the chromosome. This base is not included in the gene.
-
-For example, to specify the first 250 bases on chromosome 4:
-chr4    0    250
-
-The next six column are specified by the BED format but are not used in variant collapsing:
-
-4. **name** - Optional identifier for this region.
-5. **score** -  Not used.
-6. **strand** - Not used.
-7. **thickStart** - Not used.
-8. **thickEnd** - Not used.
-9. **itemRgb** - Not used.
-
-The last three columns are potentially used if collapsing:
-
-10. **blockCount** - The number of blocks (exons) in the gene.
-11. **blockSizes** - The size of each exon, comma separated list the size of blockCount.
-12. **blockStarts** - Positions where each exon should begin, relative to chromStart. Comma separated list the size of blockCount
-
-
-To collapse variants by gene, the first three columns are required to indicate where each gene begins and ends.
-
-To collapse variants by exon, all twelve columns must be present. The coding region is defined to be where the first block/exon starts to where the last one ends. Each exon is specified by a block and variants within that block will be collapsed.
-
-.. warning:: Genes and exons can be very large and could contain thousands of variants to collapse in a single test. This can cause large computational burden, especially if a permutation test is used to calculate the p-value. Therefore, a maximum collapse size can be specified. Variants will be collapsed into a single test until the maximum size is reached and subsequent variants will be put into a new collapsed set.
 

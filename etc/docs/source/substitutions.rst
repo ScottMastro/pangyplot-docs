@@ -3,5 +3,11 @@
 .. |tool| replace:: PangyPlot
 .. |segment| replace:: ``Segment``
 .. |bubble| replace:: ``Bubble``
-.. |superbubble| replace:: ``SuperBubble``
-.. |chain| replace:: ``BubbleChain``
+.. |chain| replace:: ``Chain``
+.. |simple| replace:: ``simple``
+.. |super| replace:: ``super``
+
+.. |end| replace:: ``END``
+.. |linksto| replace:: ``LINKS_TO``
+.. |inside| replace:: ``INSIDE``
+.. |parent| replace:: ``PARENT``
