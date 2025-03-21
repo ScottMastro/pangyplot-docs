@@ -21,19 +21,6 @@ Choosing a Region
    Below are the different methods to select a coordinate range.</p>
 
 
-
-Selecting by Coordinates
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-The simplest way to select a range - directly by reference coordinate.
-
-.. figure:: _images/coordinate_selector.png
-   :alt: coordinate selector
-   :align: center
-
-   **Select by Reference Coordinate** section of |tool|.
-
-
 Selecting by Chromosome
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -57,6 +44,22 @@ Only one chromosome can be highlighted at a time.
 
 A cytoband display of the highlighted chromosome is rendered. Clicking and dragging along the chromosome will select a specific region.
 The coordinates of this region populates the **Go** section.
+
+
+
+Selecting by Coordinates
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The simplest way to select a range - directly by reference coordinate.
+
+.. figure:: _images/coordinate_selector.png
+   :alt: coordinate selector
+   :align: center
+
+   **Select by Reference Coordinate** section of |tool|.
+
+
+
 
 Selecting by Gene
 ~~~~~~~~~~~~~~~~~~~~~~~~
