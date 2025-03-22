@@ -7,18 +7,31 @@ Usage
 Choosing a Region
 -----------------------
 
-|tool| provides various options for choosing the range to be visualized. 
+|tool| uses a coordinate system based on one of the reference paths embedded in the sequence graph. The primary coordinate system is specified during setup — typically using a reference genome such as GRCh38 or CHM13.
 
 .. figure:: _images/go_button.png
-   :alt: go button
+   :alt: coordinate section
    :align: center
 
-   **Go** section of |tool|.
+   Coordinate section of |tool|.
 
 .. raw:: html
 
-   <p>Each method fills the above box with a set of coordinates, and clicking the <code>Go <i class="fas fa-bolt"></i></code> button initiates the visualization process.
-   Below are the different methods to select a coordinate range.</p>
+   <p>
+      <code><i class="fas fa-crosshairs"></i></code> Manually enter or adjust the coordinate range.
+      <br>
+      <code><i class="fas fa-copy"></i></code> Copy the current coordinate range.
+      <br>
+      <code><i class="fas fa-plus-minus"></i></code> Set the number of flanking base pairs to include.
+      <br>
+      <code><i class="fas fa-minus"></i></code> Include flanking sequence upstream of the coordinate range.
+      <br>
+      <code><i class="fas fa-plus"></i></code> Include flanking sequence downstream of the coordinate range.
+      <br>
+      <code>Go <i class="fas fa-bolt-lightning"></i></code> Retrieve and display the specified coordinate range.
+   </p>
+
+   Each method below also fills the <i class="fas fa-crosshairs"></i> with a set of coordinates.</p>
 
 
 Selecting by Chromosome
@@ -32,9 +45,8 @@ Range selection can be done by choosing a chromosome and highlighting a region.
 
    **Chromosome Selector** section of |tool|.
 
-By default, |tool| assumes a standard set of human chromosomes. Any non-canonical chromosome can be found in the ``Other`` dropdown box.
-Only one chromosome can be highlighted at a time.
-
+By default, |tool| assumes a standard set of human chromosomes. Future versions of the software may accomodate different chromsomes for non-human species. Non-canonical chromosomes can be found in the ``Other`` selection box.
+Only one chromosome can be selected at a time.
 
 .. figure:: _images/locus_selector.png
    :alt: locus selector
@@ -42,30 +54,15 @@ Only one chromosome can be highlighted at a time.
 
    **Locus Selector** section of |tool|.
 
-A cytoband display of the highlighted chromosome is rendered. Clicking and dragging along the chromosome will select a specific region.
-The coordinates of this region populates the **Go** section.
-
-
-
-Selecting by Coordinates
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-The simplest way to select a range - directly by reference coordinate.
-
-.. figure:: _images/coordinate_selector.png
-   :alt: coordinate selector
-   :align: center
-
-   **Select by Reference Coordinate** section of |tool|.
-
+A cytoband display of the highlighted chromosome is rendered. Clicking and dragging along the chromosome will select a specific region. At this time, large regions may not be viewable due to the amount of data, but this limitation is a high priority for future improvments. 
 
 
 
 Selecting by Gene
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-A gene search bar is included as a method to query for a particular region. Gene names and Ensembl IDs are indexed for search.
-The gene annotations are sourced from `GENCODE 🔗 <https://www.gencodegenes.org/human/>`_ but if using a custom pangnome, any GFF3 file can be indexed for search.
+Gene annotations in GFF3 format, such as those provided by `GENCODE 🔗 <https://www.gencodegenes.org/human/>`_, may be preloaded into |tool| and indexed for search.
+The gene search bar shows these genes and allow for rapid selection of a particular region.
 
 .. figure:: _images/gene_selector.png
    :alt: gene selector
