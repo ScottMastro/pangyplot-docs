@@ -1,5 +1,5 @@
-.. |git| replace:: https://github.com/ScottMastro/graph_viz
-.. |gitclone| replace:: ``git clone https://github.com/ScottMastro/graph_viz``
+.. |git| replace:: https://github.com/ScottMastro/pangyplot
+.. |gitclone| replace:: ``git clone https://github.com/ScottMastro/pangyplot``
 .. |tool| replace:: PangyPlot
 .. |segment| replace:: ``Segment``
 .. |bubble| replace:: ``Bubble``

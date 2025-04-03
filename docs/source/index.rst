@@ -8,15 +8,18 @@
 |tool|
 ==================================
 
-|tool| is a visualization tool developed for human pangenomic research. Its primary function is to offer visual representations of large graph genomes,  facilitating the exploration and analysis of complex genomic data.
- 
+|tool| is a visualization tool developed for human pangenomic data. A public version preloaded with data is available here:
 
+https://pangyplot.research.sickkids.ca/ 
+
+ Data used here is from the `Human Pangenome Reference Consortium 🔗 <https://github.com/human-pangenomics/hpp_pangenome_resources>`_ (minigraph-cactus).
 
 .. figure:: _images/ui_screenshot.png
    :alt: user interface
    :align: center
 
    Screenshot of |tool|.
+
 
 
 Motivation
@@ -60,6 +63,6 @@ This allows users to control the level of detail visible and also limits the com
    :maxdepth: 2
    :caption: Table of Contents
 
+   setup
    usage
    implementation
-   setup

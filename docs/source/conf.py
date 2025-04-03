@@ -12,7 +12,7 @@
 # General configuration
 
 # Add any Sphinx extension module names here, as strings.
-extensions = ['sphinx.ext.autodoc', "sphinx.ext.mathjax"]
+extensions = ['sphinx.ext.autodoc', "sphinx.ext.mathjax", 'sphinx_copybutton']
 
 # The suffix(es) of source filenames.
 source_suffix = '.rst'
