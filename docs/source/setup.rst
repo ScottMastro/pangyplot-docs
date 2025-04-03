@@ -14,6 +14,10 @@ To run |tool| from scratch locally or on a remote server, you’ll need the foll
 3. A GFA graph file.
 4. Gene annotation file (optional).
 
+.. toctree::
+   :maxdepth: 1
+
+   setup/neo4j
 
 |tool| subcommands
 ------------------------------
@@ -26,13 +30,4 @@ To run |tool| from scratch locally or on a remote server, you’ll need the foll
 
 
 
- 
 
-
-
-
-
-.. toctree::
-   :maxdepth: 1
-
-   setup/neo4j

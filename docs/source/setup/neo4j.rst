@@ -1,3 +1,5 @@
+.. include:: ../substitutions.rst
+
 Installing Neo4j
 ------------------------------
 
@@ -72,7 +74,7 @@ If you're running Neo4j on your local machine:
 
 The Neo4j browser also has a built-in visual explorer:
 
-.. figure:: _images/neo4j_bubblechain.svg
+.. figure:: ../_images/neo4j_bubblechain.svg
    :alt: Neo4j database schema
    :align: center
    :width: 600px
