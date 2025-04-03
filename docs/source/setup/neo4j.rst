@@ -3,7 +3,7 @@
 Installing Neo4j
 ------------------------------
 
-The `(official Neo4j installation guide) 🔗 <https://neo4j.com/docs/operations-manual/current/installation/>`_ should be consulted for up-to-date information. Below are quick guides for Ubuntu and CentOS.
+The `(official Neo4j installation guide) <https://neo4j.com/docs/operations-manual/current/installation/>`_ should be consulted for up-to-date information. Below are quick guides for Ubuntu and CentOS.
 
 **Ubuntu / Debian (APT)**
 
@@ -52,7 +52,7 @@ The `(official Neo4j installation guide) 🔗 <https://neo4j.com/docs/operations
 
       sudo systemctl enable neo4j
 
-> For more details, refer to the `Neo4j RPM installation guide 🔗 <https://neo4j.com/docs/operations-manual/current/installation/linux/rpm/>`_
+> For more details, refer to the `Neo4j RPM installation guide <https://neo4j.com/docs/operations-manual/current/installation/linux/rpm/>`_
 
 Accessing the Neo4j Database
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

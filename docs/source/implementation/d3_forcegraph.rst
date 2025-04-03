@@ -3,7 +3,7 @@
 Rendering: D3 Force Graph
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-|tool| uses the `D3 Force Graph library 🔗 <https://github.com/vasturiano/force-graph>`_ to draw the graph representation.
+|tool| uses the `D3 Force Graph library <https://github.com/vasturiano/force-graph>`_ to draw the graph representation.
 
 This library is able to render the graph given a set of nodes and links.
 In |tool|, segments of sequence are represented by nodes. 

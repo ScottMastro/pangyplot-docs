@@ -61,7 +61,7 @@ A cytoband display of the highlighted chromosome is rendered. Clicking and dragg
 Selecting by Gene
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-Gene annotations in GFF3 format, such as those provided by `GENCODE 🔗 <https://www.gencodegenes.org/human/>`_, may be preloaded into |tool| and indexed for search.
+Gene annotations in GFF3 format, such as those provided by `GENCODE <https://www.gencodegenes.org/human/>`_, may be preloaded into |tool| and indexed for search.
 The gene search bar shows these genes and allow for rapid selection of a particular region.
 
 .. figure:: _images/gene_selector.png
@@ -135,7 +135,7 @@ Actions
 Annotations
 ~~~~~~~~~~~~~~~~~
 
-The gene annotations are sourced from `GENCODE 🔗 <https://www.gencodegenes.org/human/>`_ but if using a custom pangnome, any GFF3 file can be used to annotate genes.
+The gene annotations are sourced from `GENCODE <https://www.gencodegenes.org/human/>`_ but if using a custom pangnome, any GFF3 file can be used to annotate genes.
 
 .. figure:: _images/gene_annotation.png
    :alt: gene annotation

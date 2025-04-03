@@ -3,7 +3,7 @@
 Graph Structures: BubbleGun
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-`BubbleGun 🔗 <https://github.com/fawaz-dabbaghieh/bubble_gun>`_ is a tool that identifies topological structures in a graph (GFA file).
+`BubbleGun <https://github.com/fawaz-dabbaghieh/bubble_gun>`_ is a tool that identifies topological structures in a graph (GFA file).
 These topological structures can be nested within each other, forming a hierarchical chain of superstructures.
 The BubbleGun source code has been integrated into the |tool| back-end code.
 
@@ -20,7 +20,7 @@ Ex. a simple bialleleic SNP or indel.
 
 ``BubbleChain`` - a subgraph containing one or more ``Bubble`` such that the sink node of one is the source node of the next.
 
-The figure below is from the `BubbleGun publication 🔗 <https://doi.org/10.1093/bioinformatics/btac448>`_.
+The figure below is from the `BubbleGun publication <https://doi.org/10.1093/bioinformatics/btac448>`_.
 
 .. figure:: ../_images/bubblegun_figure.png
    :alt: figure from BubbleGun paper 

@@ -3,7 +3,7 @@
 Database: Neo4j
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-`Neo4j 🔗 <https://neo4j.com/>`_ is a graph database where data is stored as a series of nodes and relationships.
+`Neo4j <https://neo4j.com/>`_ is a graph database where data is stored as a series of nodes and relationships.
 Neo4j mirrors the stucture of the graph genomes which makes it ideal for storage and queries. 
 During setup of |tool|, a GFA file is parsed and the ``S``, ``L``, ``P``, ``W`` lines are extracted.
 |bubble| and |chain| superstructures are enumerated by BubbleGun.

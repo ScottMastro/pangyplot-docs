@@ -12,7 +12,7 @@
 
 https://pangyplot.research.sickkids.ca/ 
 
- Data used here is from the `Human Pangenome Reference Consortium 🔗 <https://github.com/human-pangenomics/hpp_pangenome_resources>`_ (minigraph-cactus).
+ Data used here is from the `Human Pangenome Reference Consortium <https://github.com/human-pangenomics/hpp_pangenome_resources>`_ (minigraph-cactus).
 
 .. figure:: _images/ui_screenshot.png
    :alt: user interface
