@@ -22,11 +22,41 @@ To run |tool| from scratch locally or on a remote server, you’ll need the foll
 |tool| subcommands
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- ``pangyplot setup``
-- ``pangyplot status``
-- ``pangyplot add``
-- ``pangyplot drop```
+|tool| subcommands
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- ``pangyplot setup``  
+  Initial configuration of |tool|.
+
+- ``pangyplot status``  
+  Check the databases currently available.
+
+- ``pangyplot run``  
+  Launch the web application.  
+  Options:
+  - ``--db``: Database name (default: ``default``)
+  - ``--port``: Port to serve the app (default: ``5700``)
+
+- ``pangyplot add``  
+  Add a dataset to the database.  
+  Required:
+  - ``--ref``: Reference name
+  - ``--gfa``: Path to rGFA file
+  - ``--layout``: Path to layout TSV file
+  - ``--positions``: Position TSV file
+
 - ``pangyplot annotate``
+  Add gene annotation to a reference.  
+  Required:
+  - ``--ref``: Reference name
+  - ``--gff3``: Path to GFF3 annotation file
+
+- ``pangyplot drop``
+  Drop tables from the database.  
+  Options:
+  - ``--db``: Drop from a specific database  
+  - ``--annotations``: Drop annotation tables  
+  - ``--all``: Drop all stored data
 
 
 Setting up with HPRC data
