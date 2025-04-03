@@ -25,7 +25,17 @@ To run |tool| from scratch locally or on a remote server, you’ll need the foll
 pangyplot setup
 ######################
 
-  Initial configuration of |tool|.
+  This command sets up a `.env` file used by |tool| to configure the Neo4j database connection and other settings.
+
+  The following values will be interactively prompted and saved:
+
+  - **DB_USER**: Neo4j username.
+  - **DB_PASS**: Neo4j password.
+  - **DB_HOST**: Neo4j host address (include either ``bolt://`` or ``neo4j://`` as a prefix).
+  - **DB_PORT**: Neo4j port number (default is 7687).
+  - **GA_TAG_ID**: Optional Google Analytics tag ID to track visits to website.
+
+  If a `.env` file already exists, you will be asked whether to overwrite it. Existing values will be used as defaults when prompting for new values. 
 
 pangyplot status
 ######################
