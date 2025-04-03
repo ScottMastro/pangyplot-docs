@@ -1,5 +1,6 @@
 :root {
     --highlight: #FFE268;
+    --dark-grey: #D6D6D6;
     --grey: #F2F2F2;
     --darker-green: #384034;
     --dark-green: #5D6C53;
@@ -50,8 +51,8 @@
 
 
 blockquote{
-    border-left: solid var(--dark-green);
-    background: var(--lighter-green);
+    border-left: solid var(--dark-grey);
+    background: var(--grey);
     padding-left: 24px;
     padding-top: 12px;
     padding-bottom: 12px;
