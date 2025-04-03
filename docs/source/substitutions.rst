@@ -10,4 +10,3 @@
 .. |end| replace:: ``END``
 .. |linksto| replace:: ``LINKS_TO``
 .. |inside| replace:: ``INSIDE``
-.. |parent| replace:: ``PARENT``

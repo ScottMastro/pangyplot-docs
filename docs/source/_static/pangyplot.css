@@ -1,5 +1,6 @@
 :root {
     --highlight: #FFE268;
+    --grey: #F2F2F2;
     --darker-green: #384034;
     --dark-green: #5D6C53;
     --light-green: #93AC9D;
@@ -32,7 +33,7 @@
     background: var(--lighter-green) !important;
 }
 .highlight{
-    background: var(--lighter-green) !important;
+    background: var(--grey) !important;
 }
 
 .custom-header{

@@ -55,7 +55,7 @@ The `(official Neo4j installation guide) 🔗 <https://neo4j.com/docs/operations
 > For more details, refer to the `Neo4j RPM installation guide 🔗 <https://neo4j.com/docs/operations-manual/current/installation/linux/rpm/>`_
 
 Accessing the Neo4j Database
------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once Neo4j is running, you can access the browser-based interface to manage the database.
 

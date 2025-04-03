@@ -83,9 +83,9 @@ Rendering
 
    A |segment|.
 
-A |segment| from the rGFA file (``S`` line). 
+A |segment| from the GFA file (``S`` line). 
 A single chunk of sequence, has reference coordinates if on the reference path.
-Links show possible paths through the pangenome (the ``L`` lines from the rGFA file).
+Links show possible paths through the pangenome (the ``L`` lines from the GFA file).
 
 .. figure:: _images/bubble_node.png
    :alt: bubble

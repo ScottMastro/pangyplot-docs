@@ -20,8 +20,6 @@ https://pangyplot.research.sickkids.ca/
 
    Screenshot of |tool|.
 
-
-
 Motivation
 ---------------
 
@@ -62,7 +60,7 @@ This allows users to control the level of detail visible and also limits the com
 .. toctree::
    :maxdepth: 2
    :caption: Table of Contents
-
+    
    setup
    usage
    implementation
