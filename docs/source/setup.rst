@@ -12,6 +12,24 @@ To run |tool| from scratch locally or on a remote server, you’ll need the foll
 1. The |tool| source code, available from |git|.
 2. A running instance of Neo4j.
 3. A GFA graph file.
+4. Gene annotation file (optional).
+
+
+|tool| subcommands
+------------------------------
+
+- `pangyplot setup`
+- `pangyplot status`
+- `pangyplot add`
+- `pangyplot drop`
+- `pangyplot annotate`
+
+
+
+ 
+
+
+
 
 
 .. toctree::
