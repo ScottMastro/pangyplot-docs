@@ -7,7 +7,7 @@ Running Neo4j
 Installing Neo4j
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The `(official Neo4j installation guide) <https://neo4j.com/docs/operations-manual/current/installation/>`_ should be consulted for up-to-date information. Below are quick guides for Ubuntu and CentOS.
+The `official Neo4j installation guide <https://neo4j.com/docs/operations-manual/current/installation/>`_ should be consulted for up-to-date information. Below are quick guides for Ubuntu and CentOS.
 
 **Ubuntu / Debian (APT)**
 
@@ -65,32 +65,46 @@ Once Neo4j is running, you can access the browser-based interface to manage the 
 
 **Local Access**
 
-If you're running Neo4j on your local machine:
+If you're running Neo4j on your local machine, ensure Neo4j is running then open your internet browser to: http://localhost:7474
 
-1. Open your browser and go to: http://localhost:7474
+**Remote Access via SSH Tunnel**
 
-2. Log in with:
+If Neo4j is running on a remote server, you can create a secure SSH tunnel to access it locally. This will forward the Neo4j web interface from the remote server to your local machine, allowing full access through the browser.
 
-   - **Username:** `neo4j`
-   - **Password:** `neo4j`
+.. code-block:: bash
 
-   You'll be prompted to change the password on your first login.
+   ssh -N \
+   -L 7475:localhost:7474 \
+   -L 7688:localhost:7687 \
+      user@domain
 
-The Neo4j browser also has a built-in visual explorer:
+Then open your internet browser to: http://localhost:7475
+
+.. note:: 
+    One port tunnel is for the Neo4j browser (7475), and the other is for the Neo4j database connection (7688). Here we use port 7475 and 7688 to avoid conflicts with a local Neo4j instance but any available port can be used. 
+
+.. note:: 
+   You will need to change the "Connect URL" to the tunnelled port (localhost:7688).
+
+The Neo4j browser also provides a built-in visual explorer:
 
 .. figure:: ../_images/neo4j_bubblechain.svg
    :alt: Neo4j database schema
    :align: center
    :width: 600px
 
-**Remote Access via SSH Tunnel**
 
-If Neo4j is running on a remote server, you can create a secure SSH tunnel to access it locally:
+Setting Neo4j Credentials
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: bash
+After accessing the Neo4j browser for the first time, you will be prompted to update your credentials. 
 
-   ssh -L 7475:localhost:7474 user@remote-server
+The default credentials are:
+   - **Username:** `neo4j`
+   - **Password:** `neo4j`
 
-Then open your browser and go to: http://localhost:7475
+.. note:: 
+   The username and password will be required by `pangyplot setup` in order to access the Neo4j database.
 
-This will forward the Neo4j web interface from the remote server to your local machine, allowing full access through the browser.
+
+

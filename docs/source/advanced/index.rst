@@ -18,8 +18,8 @@ To run |tool| from scratch locally or on a remote server, you’ll need the foll
     :maxdepth: 2
     :caption: Advanced Topics
 
-    subcommands
     setup
+    subcommands
     neo4j
     layout
     bubblegun

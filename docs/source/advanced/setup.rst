@@ -1,8 +1,23 @@
 .. include:: ../substitutions.rst
 .. _setup:
 
-Setup Example
+Quick Example
 ==============================
+
+.. figure:: ../_images/neo4j_logo.png
+   :alt: Neo4j logo
+   :width: 140px
+   :target: neo4j.html
+
+   **Prerequisite 1**: `Neo4j <neo4j.html>`_ database installed and running.
+
+.. figure:: ../_images/odgi_logo.png
+   :alt: odgi "logo"
+   :width: 120px
+   :target: layout.html
+
+   **Prerequisite 2**: `odgi <layout.html>`_ installed to calculate graph layout.
+
 
 Setting up with HPRC data
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

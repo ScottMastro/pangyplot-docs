@@ -1,7 +1,7 @@
 .. _subcommands:
 .. include:: ../substitutions.rst
 
-|tool| subcommands
+|tool| Subcommands
 ==============================
 
 pangyplot setup

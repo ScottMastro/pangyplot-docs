@@ -10,7 +10,6 @@ Basic Usage
 
    Screenshot of |tool|.
 
-
 .. toctree::
    :maxdepth: 2
    :caption: Basic Topics
