@@ -1,7 +1,8 @@
+.. _forcegraph:
 .. include:: ../substitutions.rst
 
 Rendering: D3 Force Graph
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==================================
 
 |tool| uses the `D3 Force Graph library <https://github.com/vasturiano/force-graph>`_ to draw the graph representation.
 

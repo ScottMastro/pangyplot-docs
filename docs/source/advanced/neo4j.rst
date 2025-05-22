@@ -1,7 +1,11 @@
+.. _neo4j:
 .. include:: ../substitutions.rst
 
+Running Neo4j
+==============================
+
 Installing Neo4j
-------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The `(official Neo4j installation guide) <https://neo4j.com/docs/operations-manual/current/installation/>`_ should be consulted for up-to-date information. Below are quick guides for Ubuntu and CentOS.
 
@@ -55,7 +59,7 @@ The `(official Neo4j installation guide) <https://neo4j.com/docs/operations-manu
 > For more details, refer to the `Neo4j RPM installation guide <https://neo4j.com/docs/operations-manual/current/installation/linux/rpm/>`_
 
 Accessing the Neo4j Database
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Once Neo4j is running, you can access the browser-based interface to manage the database.
 

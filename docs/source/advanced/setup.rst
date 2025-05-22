@@ -1,93 +1,11 @@
-.. include:: substitutions.rst
+.. include:: ../substitutions.rst
 .. _setup:
 
-Running |tool|
-==================================
-
-Requirements
-------------------------------
-
-To run |tool| from scratch locally or on a remote server, you’ll need the following:
-
-1. The |tool| source code, available from |git|.
-2. A running instance of Neo4j.
-3. A GFA graph file.
-4. Gene annotation file (optional).
-
-.. toctree::
-   :maxdepth: 1
-
-   setup/neo4j
-
-|tool| subcommands
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-pangyplot setup
-######################
-
-  This command sets up a `.env` file used by |tool| to configure the Neo4j database connection and other settings.
-
-  The following values will be interactively prompted and saved:
-
-  - **DB_USER**: Neo4j username.
-  - **DB_PASS**: Neo4j password.
-  - **DB_HOST**: Neo4j host address (include either ``bolt://`` or ``neo4j://`` as a prefix).
-  - **DB_PORT**: Neo4j port number (default is 7687).
-  - **GA_TAG_ID**: Optional Google Analytics tag ID to track visits to website.
-
-  If a `.env` file already exists, you will be asked whether to overwrite it. Existing values will be used as defaults when prompting for new values. 
-
-pangyplot status
-######################
-
-  Check the databases currently available.
-
-pangyplot run
-######################
-
-  Launch the web application.
-
-  **Options:**
-
-  - ``--db``: Database name (default: ``default``)  
-  - ``--port``: Port to serve the app (default: ``5700``)
-
-pangyplot add
-######################
-
-  Add a dataset to the database.
-
-  **Required:**
-
-  - ``--ref``: Reference name  
-  - ``--gfa``: Path to rGFA file  
-  - ``--layout``: Path to layout TSV file  
-  - ``--positions``: Position TSV file
-
-pangyplot annotate
-######################
-
-  Add gene annotation to a reference.
-
-  **Required:**
-
-  - ``--ref``: Reference name  
-  - ``--gff3``: Path to GFF3 annotation file
-
-pangyplot drop
-######################
-
-  Drop tables from the database.
-
-  **Options:**
-
-  - ``--db``: Drop from a specific database  
-  - ``--annotations``: Drop annotation tables  
-  - ``--all``: Drop all stored data
-
+Setup Example
+==============================
 
 Setting up with HPRC data
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To test |tool| with Human Pangenome Reference Consortium (HPRC) data, follow the steps below.
 

@@ -1,7 +1,11 @@
+.. _layout:
 .. include:: ../substitutions.rst
 
-Layout: odgi
-^^^^^^^^^^^^^^^^^^^^^^^^
+Calculating Graph Layout
+==============================
+
+odgi layout
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 |tool| relies on `odgi <https://github.com/pangenome/odgi>`_ to calculate the 2D layout of nodes.
 The GFA file is therefore needs to be converted into odgi format ``*.og``.

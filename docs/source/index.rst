@@ -8,59 +8,47 @@
 |tool|
 ==================================
 
-|tool| is a visualization tool developed for human pangenomic data. A public version preloaded with data is available here:
+|tool| is a browser that enables visualization of pangenomic data. 
 
-https://pangyplot.research.sickkids.ca/ 
+Quick Links
+----------------------------------------------
 
- Data used here is from the `Human Pangenome Reference Consortium <https://github.com/human-pangenomics/hpp_pangenome_resources>`_ (minigraph-cactus).
++-----------------------------------------+----------------------------+------------------------------------------------------+
+|.. image:: _images/favicon_black.svg     | `Live Instance`_           | Preloaded with `HPRC data`_                          |
+|    :width: 16px                         |                            |                                                      |
+|    :align: center                       |                            |                                                      |
+|    :target:  `Live Instance`_           |                            |                                                      |
++-----------------------------------------+----------------------------+------------------------------------------------------+
+|.. image:: _images/icon_github.svg       | `GitHub`_                  |                                                      |
+|    :width: 16px                         |                            |                                                      |
+|    :align: center                       |                            |                                                      |
+|    :target: `GitHub`_                   |                            |                                                      |
++-----------------------------------------+----------------------------+------------------------------------------------------+
+|.. image:: _images/biorxiv.svg           | `Paper`_                   |                                                      |
+|    :width: 16px                         |                            |                                                      |
+|    :align: center                       |                            |                                                      |
+|    :target: `Paper`_                    |                            |                                                      |
++-----------------------------------------+----------------------------+------------------------------------------------------+
 
-.. figure:: _images/ui_screenshot.png
-   :alt: user interface
-   :align: center
-
-   Screenshot of |tool|.
-
-Motivation
----------------
-
-A visual interface is fundamental for detecting patterns and gaining meaningful insights into large, complex genomic datasets.
-Pangenomes typically rely on a graph-based data structure, which is very difficult to navigate without a visualization of the graph topology.
-
-Graph genomes are particularly challenging to analyze because they include billions of base pairs and encompass all the potential variations within them.
-The range of variation size is also large. For instance, examining the relationship between a SNP and a 20kb structural variant represents a 20,000-fold difference in scale.
-
-To overcome these issues, consider the system used for structuring physical locations:
-
-.. figure:: _images/graph_analogy.svg
-   :alt: Units ➜ Buildings ➜ Streets ➜ Cities ➜ ...
-   :width: 500px
-   :align: center
-
-   Physical locations have a hierarchical relationship. The level of detail needed depends on the goal.
- 
-
-Online map applications need to meet a diverse set of demands: from navigating between countries, finding an intersection, directions to the front door of a building. 
-These applications hide unnecessary details based on the user's zoom level, focusing on major highways or rail lines when zoomed out and only showing the name of tiny side streets when zoomed all the way in.
+.. _HPRC data: https://github.com/human-pangenomics/hpp_pangenome_resources
+.. _Live Instance: https://pangyplot.research.sickkids.ca/
+.. _GitHub: https://github.com/scottmastro/pangyplot
+.. _Paper: https://doi.org/10.1101/2023.10.02.560679
 
 
-.. figure:: _images/graph_analogy2.svg
-   :alt: Base Pair ➜ SNP ➜ Locus ➜ Structural Variant ➜ ...
-   :width: 500px
-   :align: center
+Documentation
+----------------------------------------------
 
-   Genetic variation has a hierarchical relationship. The level of detail needed also depends on the goal.
- 
-Likewise, analysis of genetic variation can happen at very different scales from the chromosomal level, to structural variation to indivdual SNPs.
-|tool| aims to capture common topological patterns in graph genomes and builds a hierarchical structure of the variation in the genome.
-This allows users to control the level of detail visible and also limits the computation necessary to view large regions by abstracting the details.
+This documentation has been split based on the type of user:
 
+`Basic usage <basic/index.html>`__ – How to interact with an existing PangyPlot instance.
 
-|git|
+`Advanced usage <advanced/index.html>`__ – How to set up a new PangyPlot instance and add your own data.
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Table of Contents
-    
-   setup
-   usage
-   implementation
+   :hidden:
+   
+   basic/index
+   advanced/index

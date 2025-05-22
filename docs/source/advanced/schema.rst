@@ -1,3 +1,4 @@
+.. _schema:
 .. include:: ../substitutions.rst
 
 Database: Neo4j
