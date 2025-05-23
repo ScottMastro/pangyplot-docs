@@ -52,3 +52,4 @@ This documentation has been split based on the type of user:
    
    basic/index
    advanced/index
+   principles
